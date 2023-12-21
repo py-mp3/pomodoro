@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>The Pomodoro Technique</title>
+
+  <!-- Added Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+</head>
+
+<body>
+
+  <!--#/**
+HTML content explaining the Pomodoro time management technique. Includes an explanation of the technique, steps to follow it,and benefits. Renders informational content to the user. /-->
+
+  <div class="container">
+
+    <h1>The Pomodoro Technique</h1>
+
+    <p class="lead">The pomodoro technique is a time management method that uses a timer to break down work into
+      intervals, traditionally 25 minutes in length, separated by short breaks. These intervals are named
+      pomodoros, after the Italian word for 'tomatoes.'</p>
+
+    <h2>How the Pomodoro Technique Works</h2>
+
+    <p>The steps for using the pomodoro technique are:</p>
+
+    <ol class="list-group list-group-numbered">
+      <li class="list-group-item">Decide on the task to be done</li>
+      <li class="list-group-item">Set a timer for 25 minutes</li>
+      <li class="list-group-item">Work on the task until the timer rings</li>
+      <li class="list-group-item">Take a 5 minute break</li>
+      <li class="list-group-item">Every 4 pomodoros, take a longer 15-20 minute break</li>
+    </ol>
+
+    <p class="mt-3">The pomodoro technique uses these timed intervals to help you focus for a period of time and
+      take regular breaks, which can improve productivity.</p>
+
+    <h2>Benefits of the Pomodoro Technique</h2>
+
+    <ul class="list-group">
+      <li class="list-group-item">Increased focus and concentration</li>
+      <li class="list-group-item">More productive work sessions</li>
+      <li class="list-group-item">Regular breaks help prevent burnout</li>
+      <li class="list-group-item">Provides structure for managing time</li>
+    </ul>
+
+    <button onclick="handleStart()" class="btn btn-primary btn-lg" id="start" onclick="startTimer()"
+      style="display: block; margin: 0 auto;">
+      Start Timer
+    </button>
+
+    <div class="d-flex justify-content-center">
+      <div class="p-2">
+        <span id="timer-minutes" class="display-4"></span>
+      </div>
+
+      <div class="p-2">
+        :
+      </div>
+
+      <div class="p-2">
+        <span id="timer-seconds" class="display-4"></span>
+      </div>
+    </div>
+
+
+
+  </div>
+</body>
+
+
+
+<script>
+  // Pomodoro timer code
+  let pomodoroDuration = 25 * 60; // 25 minutes in seconds
+  let shortBreakDuration = 5 * 60; // 5 minutes in seconds 
+  let longBreakDuration = 15 * 60; // 15 minutes in seconds
+
+  let timerInterval;
+
+  function startTimer() {
+    let timer = pomodoroDuration;
+    updateTimer(timer);
+
+    // Added fix to start the timer interval
+    timerInterval = setInterval(() => {
+      timer--;
+      updateTimer(timer);
+      if (timer < 0) {
+        clearInterval(timerInterval);
+        timerInterval = null;
+        startButton.innerHTML = 'Start Timer';
+      }
+    }, 1000);
+  }
+
+  function updateTimer(seconds) {
+    let minutes = Math.floor(seconds / 60);
+    let remainingSeconds = seconds % 60;
+    document.getElementById('timer-minutes').textContent = minutes;
+    document.getElementById('timer-seconds').textContent = remainingSeconds;
+  }
+
+
+  function handleStart() {
+    console.log("start")
+    if (timerInterval) {
+      clearInterval(timerInterval);
+      timerInterval = null;
+      startButton.innerHTML = 'Start Timer';
+    } else {
+      startTimer();
+      startButton.innerHTML = 'Pause Timer';
+    }
+  }
+
+  // // Start/Pause button
+  // let startButton = document.getElementById('start');
+  // startButton.addEventListener('click', () => {
+  // });
+
+</script>
+
+
+
+
+
+
+</html>
